@@ -1,13 +1,13 @@
-FROM entando/entando-java-base:11.0.3
+FROM villanova/villanova-java-base:11.0.3
 ARG VERSION
 ### Required Openshift Labels
-LABEL name="Entando Kubernetes Service" \
-      maintainer="dev@entando.com" \
-      vendor="Entando Inc." \
+LABEL name="Villanova Kubernetes Service" \
+      maintainer="dev@villanova.com" \
+      vendor="Villanova Spa" \
       version="v${VERSION}" \
       release="7.3" \
-      summary="Entando infrastructure project for Kubernetes APIs" \
-      description="Entando infrastructure project for kubernetes APIs"
+      summary="Villanova infrastructure project for Kubernetes APIs" \
+      description="Villanova infrastructure project for kubernetes APIs"
 
 COPY target/generated-resources/licenses /licenses
 COPY entrypoint.sh /
@@ -22,7 +22,7 @@ COPY pom.xml target/lib* /opt/lib/
 # NOTE we assume there's only 1 jar in the target dir
 # but at least this means we don't have to guess the name
 # we could do with a better way to know the name - or to always create an app.jar or something
-COPY target/entando-k8s-service.jar /opt/app.jar
+COPY target/villanova-k8s-service.jar /opt/app.jar
 WORKDIR /opt
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxRAMPercentage=90.0", "-XshowSettings:vm", "-jar", "app.jar"]
